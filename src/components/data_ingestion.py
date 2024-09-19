@@ -25,7 +25,9 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the data ingestion method or component")
         try:
-            df=pd.read_csv('notebook\stud.csv')
+            df=pd.read_csv('notebook\Energy_consumption.csv')
+            df['Timestamp'] = pd.to_datetime(df['Timestamp'], utc=True, infer_datetime_format=True)
+            df = df.set_index('Timestamp')
             logging.info('Read the dataset as dataframe')
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)

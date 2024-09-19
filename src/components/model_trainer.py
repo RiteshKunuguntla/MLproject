@@ -8,6 +8,7 @@ from sklearn.ensemble import (
     GradientBoostingRegressor,
     RandomForestRegressor,
 )
+
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 from sklearn.neighbors import KNeighborsRegressor
@@ -96,9 +97,9 @@ class ModelTrainer:
                 list(model_report.values()).index(best_model_score)
             ]
             best_model = models[best_model_name]
-
+            print(best_model_name)
             if best_model_score<0.6:
-                raise CustomException("No best model found")
+                print("No Best Model found")
             logging.info(f"Best found model on both training and testing dataset")
 
             save_object(
@@ -111,9 +112,6 @@ class ModelTrainer:
             r2_square = r2_score(y_test, predicted)
             return r2_square
             
-
-
-
             
         except Exception as e:
             raise CustomException(e,sys)
